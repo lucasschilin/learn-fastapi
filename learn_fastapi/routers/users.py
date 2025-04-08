@@ -4,23 +4,23 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from fastapi_studies.controllers.users_controller import (
+from learn_fastapi.controllers.users_controller import (
     controller_create_user,
     controller_delete_user,
     controller_get_user,
     controller_get_users,
     controller_update_user_password,
 )
-from fastapi_studies.database import get_session
-from fastapi_studies.models.user import User
-from fastapi_studies.schemas.message import MessageSchema
-from fastapi_studies.schemas.user import (
+from learn_fastapi.database import get_session
+from learn_fastapi.models.user import User
+from learn_fastapi.schemas.message import MessageSchema
+from learn_fastapi.schemas.user import (
     CreateUserSchema,
     GetUserSchema,
     GetUsersSchema,
     UpdateUserPasswordSchema,
 )
-from fastapi_studies.security import get_current_user
+from learn_fastapi.security import get_current_user
 
 router = APIRouter(
     prefix='/users',

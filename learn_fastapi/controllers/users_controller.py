@@ -4,12 +4,12 @@ from fastapi import HTTPException
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from fastapi_studies.models.user import User
-from fastapi_studies.schemas.user import (
+from learn_fastapi.models.user import User
+from learn_fastapi.schemas.user import (
     CreateUserSchema,
     UpdateUserPasswordSchema,
 )
-from fastapi_studies.security import get_password_hash
+from learn_fastapi.security import get_password_hash
 
 
 def controller_get_users(session: Session, current_user: User):

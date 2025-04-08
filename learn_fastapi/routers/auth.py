@@ -4,14 +4,14 @@ from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from fastapi_studies.controllers.auth_controller import (
+from learn_fastapi.controllers.auth_controller import (
     controller_create_auth_token,
     controller_refresh_token,
 )
-from fastapi_studies.database import get_session
-from fastapi_studies.models.user import User
-from fastapi_studies.schemas.token import TokenSchema
-from fastapi_studies.security import get_current_user
+from learn_fastapi.database import get_session
+from learn_fastapi.models.user import User
+from learn_fastapi.schemas.token import TokenSchema
+from learn_fastapi.security import get_current_user
 
 router = APIRouter(prefix='/auth', tags=['Auth'])
 

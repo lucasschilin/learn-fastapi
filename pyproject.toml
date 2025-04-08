@@ -48,7 +48,7 @@ quote-style = 'single'
 lint = "ruff check"
 pre_format = "ruff check --fix"
 format = "ruff format"
-run = "poetry run fastapi dev fastapi_studies/app.py"
+run = "poetry run fastapi dev learn_fastapi/app.py"
 pre_test = 'task lint'
-test = 'pytest -s -x --cov=fastapi_studies -vv'
+test = 'pytest -s -x --cov=learn_fastapi -vv'
 post_test = 'coverage html'

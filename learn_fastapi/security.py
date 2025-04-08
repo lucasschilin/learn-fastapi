@@ -10,9 +10,9 @@ from pwdlib import PasswordHash
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from fastapi_studies.database import get_session
-from fastapi_studies.models.user import User
-from fastapi_studies.settings import Settings
+from learn_fastapi.database import get_session
+from learn_fastapi.models.user import User
+from learn_fastapi.settings import Settings
 
 pwd_context = PasswordHash.recommended()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/auth/token/')
