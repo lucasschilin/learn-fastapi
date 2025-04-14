@@ -11,7 +11,13 @@ from learn_fastapi.settings import Settings
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-config.set_main_option("sqlalchemy.url", Settings().DATABASE_URL)
+
+conn_str = (
+    f'postgresql://{Settings().DATABASE_USER}:{Settings().DATABASE_PASSWORD}@'
+    f'{Settings().DATABASE_HOST}:{Settings().DATABASE_PORT}/'
+    f'{Settings().DATABASE_NAME}'
+)
+config.set_main_option("sqlalchemy.url", conn_str)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
