@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from learn_fastapi.models.user import table_registry
+from learn_fastapi.models import table_registry
 from learn_fastapi.settings import Settings
 
 # this is the Alembic Config object, which provides
