@@ -5,6 +5,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from learn_fastapi.routers import auth, me, users
 from learn_fastapi.schemas.message import MessageSchema
+from learn_fastapi.schemas.pet import (
+    CreatePetSchema,
+    GetPetSchema,
+    GetPetWithOwnersSchema,
+    GetPetsSchema
+)
 
 app = FastAPI(version='0.1.0')
 

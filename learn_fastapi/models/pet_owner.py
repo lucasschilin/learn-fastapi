@@ -7,13 +7,12 @@ from ._registry import table_registry
 
 
 @table_registry.mapped_as_dataclass
-class User:
-    __tablename__ = 'users'
+class PetOwner:
+    __tablename__ = 'pets_owners'
 
     id: Mapped[int] = mapped_column(init=False, primary_key=True)
-    username: Mapped[str] = mapped_column(unique=True)
-    email: Mapped[str] = mapped_column(unique=True)
-    password: Mapped[str]
+    pet: Mapped[int] = mapped_column(ForeignKey('pets.id'))
+    owner: Mapped[int] = mapped_column(ForeignKey('users.id'))
     created_by: Mapped[int] = mapped_column(
         ForeignKey('users.id'), init=False, nullable=True
     )
