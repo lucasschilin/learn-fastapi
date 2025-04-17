@@ -21,7 +21,7 @@ class GetPetSchema(BaseModel):
     mother: int
     father: int
     name: str
-    specie: int
+    specie: eSpecies
 
 class GetPetWithOwnersSchema(GetPetSchema):
     owners: list[GetUserSchema]
