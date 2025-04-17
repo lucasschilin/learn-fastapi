@@ -1,5 +1,5 @@
 [project]
-name = "fastapi-studies"
+name = "learn-fastapi"
 version = "0.1.0"
 description = "Projeto de estudo para aprender a respeito do framework FastAPI."
 authors = [
