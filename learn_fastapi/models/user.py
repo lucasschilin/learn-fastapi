@@ -15,7 +15,7 @@ class User:
     email: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]
     created_by: Mapped[int] = mapped_column(
-        ForeignKey('users.id'), init=False, nullable=True
+        ForeignKey('users.id'), nullable=True
     )
     created_at: Mapped[datetime] = mapped_column(
         init=False, server_default=func.now()
