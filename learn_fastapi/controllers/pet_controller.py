@@ -26,17 +26,15 @@ def controller_get_pet(id: int, session: Session, current_user: User):
             status_code=HTTPStatus.NOT_FOUND,
             detail='Pet not found',
         )
-    
 
     owners = session.scalars(
-        select(User)
-        .join(
-            PetOwner, 
+        select(User).join(
+            PetOwner,
             (
-                (PetOwner.owner == User.id) & 
-                (PetOwner.pet == pet.id) & 
-                (PetOwner.deleted_at == None)
-            )
+                (PetOwner.owner == User.id)
+                & (PetOwner.pet == pet.id)
+                & (PetOwner.deleted_at == None)
+            ),
         )
     )
 

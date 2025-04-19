@@ -14,8 +14,8 @@ from learn_fastapi.models.user import User
 from learn_fastapi.schemas.pet import (
     CreatePetSchema,
     GetPetSchema,
-    GetPetWithOwnersSchema,
     GetPetsSchema,
+    GetPetWithOwnersSchema,
 )
 from learn_fastapi.security import get_current_user
 
