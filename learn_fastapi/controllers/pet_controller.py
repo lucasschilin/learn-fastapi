@@ -1,5 +1,3 @@
-# TODO: rename controller to pet_controller.py
-
 from sqlalchemy.orm import Session
 
 from learn_fastapi.models.pet import Pet
@@ -16,7 +14,7 @@ def controller_create_pet(
         specie=body.specie,
         mother=body.mother,
         father=body.father,
-        created_by=current_user.id,     
+        created_by=current_user.id,
     )
 
     session.add(pet)
@@ -24,4 +22,3 @@ def controller_create_pet(
     session.refresh(pet)
 
     return pet
-
