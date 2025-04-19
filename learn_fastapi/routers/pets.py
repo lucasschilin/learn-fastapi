@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 
 from learn_fastapi.controllers.pet_controller import (
     controller_create_pet,
+    controller_get_pet,
     controller_get_pets,
 )
 from learn_fastapi.database import get_session
@@ -13,6 +14,7 @@ from learn_fastapi.models.user import User
 from learn_fastapi.schemas.pet import (
     CreatePetSchema,
     GetPetSchema,
+    GetPetWithOwnersSchema,
     GetPetsSchema,
 )
 from learn_fastapi.security import get_current_user
@@ -26,6 +28,13 @@ T_CurrentUser = Annotated[User, Depends(get_current_user)]
 @router.get('/', status_code=HTTPStatus.OK, response_model=GetPetsSchema)
 def get_pets(session: T_Session, current_user: T_CurrentUser):
     return controller_get_pets(session, current_user)
+
+
+@router.get(
+    '/{id}/', status_code=HTTPStatus.OK, response_model=GetPetWithOwnersSchema
+)
+def get_pet(id: int, session: T_Session, current_user: T_CurrentUser):
+    return controller_get_pet(id, session, current_user)
 
 
 @router.post(

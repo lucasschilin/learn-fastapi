@@ -16,6 +16,35 @@ def controller_get_pets(session: Session, current_user: User):
     return {'pets': pets}
 
 
+def controller_get_pet(id: int, session: Session, current_user: User):
+    pet = session.scalar(
+        select(Pet).where((Pet.id == id) & (Pet.deleted_at == None))
+    )
+
+    if not pet:
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND,
+            detail='Pet not found',
+        )
+    
+
+    owners = session.scalars(
+        select(User)
+        .join(
+            PetOwner, 
+            (
+                (PetOwner.owner == User.id) & 
+                (PetOwner.pet == pet.id) & 
+                (PetOwner.deleted_at == None)
+            )
+        )
+    )
+
+    pet.owners = owners
+
+    return pet
+
+
 def controller_create_pet(
     body: CreatePetSchema, session: Session, current_user: User
 ):
