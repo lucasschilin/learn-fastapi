@@ -4,7 +4,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from learn_fastapi.controllers.users_controller import (
+from learn_fastapi.controllers.user_controller import (
     controller_create_user,
     controller_delete_user,
     controller_get_user,

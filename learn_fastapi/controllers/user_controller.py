@@ -1,4 +1,3 @@
-# TODO: rename controller to user_controller.py
 from http import HTTPStatus
 
 from fastapi import HTTPException
