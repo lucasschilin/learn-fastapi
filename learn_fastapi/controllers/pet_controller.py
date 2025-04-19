@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 from fastapi import HTTPException
-from sqlalchemy import select
+from sqlalchemy import func, select, update
 from sqlalchemy.orm import Session
 
 from learn_fastapi.models.pet import Pet
@@ -76,3 +76,38 @@ def controller_create_pet(
         session.refresh(obj)
 
     return pet
+
+
+def controller_delete_pet(id: int, session: Session, current_user: User):
+    """Função para deletar o pet."""
+    pet = session.scalar(
+        select(Pet).where((Pet.id == id) & (Pet.deleted_at == None))
+    )
+
+    if not pet:
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND,
+            detail='Pet not found',
+        )
+
+    try:
+        pet.deleted_by = current_user.id
+        pet.deleted_at = func.now()
+
+        session.execute(
+            update(PetOwner)
+            .where((PetOwner.pet == pet.id) & (PetOwner.deleted_at == None))
+            .values(deleted_by=current_user.id, deleted_at=func.now())
+        )
+
+        session.commit()
+
+    except Exception:
+        session.rollback()
+
+        raise HTTPException(
+            status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
+            detail='An unexpected error occurred.',
+        )
+
+    return {'message': 'Pet deleted'}

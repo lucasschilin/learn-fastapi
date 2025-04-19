@@ -6,11 +6,13 @@ from sqlalchemy.orm import Session
 
 from learn_fastapi.controllers.pet_controller import (
     controller_create_pet,
+    controller_delete_pet,
     controller_get_pet,
     controller_get_pets,
 )
 from learn_fastapi.database import get_session
 from learn_fastapi.models.user import User
+from learn_fastapi.schemas.message import MessageSchema
 from learn_fastapi.schemas.pet import (
     CreatePetSchema,
     GetPetSchema,
@@ -47,3 +49,10 @@ def create_pet(
 ):
     """Através deste endpoint é possívell cadastrar um pet"""
     return controller_create_pet(body, session, current_user)
+
+
+@router.delete(
+    '/{id}/', status_code=HTTPStatus.OK, response_model=MessageSchema
+)
+def delete_pet(id: int, session: T_Session, current_user: T_CurrentUser):
+    return controller_delete_pet(id, session, current_user)
