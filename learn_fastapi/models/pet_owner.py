@@ -14,7 +14,7 @@ class PetOwner:
     pet: Mapped[int] = mapped_column(ForeignKey('pets.id'))
     owner: Mapped[int] = mapped_column(ForeignKey('users.id'))
     created_by: Mapped[int] = mapped_column(
-        ForeignKey('users.id'), init=False, nullable=True
+        ForeignKey('users.id'), nullable=True
     )
     created_at: Mapped[datetime] = mapped_column(
         init=False, server_default=func.now()
