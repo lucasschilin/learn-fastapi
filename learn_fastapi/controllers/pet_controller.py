@@ -1,12 +1,19 @@
 from http import HTTPStatus
 
 from fastapi import HTTPException
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from learn_fastapi.models.pet import Pet
 from learn_fastapi.models.pet_owner import PetOwner
 from learn_fastapi.models.user import User
 from learn_fastapi.schemas.pet import CreatePetSchema
+
+
+def controller_get_pets(session: Session, current_user: User):
+    pets = session.scalars(select(Pet).where(Pet.deleted_at == None)).all()
+
+    return {'pets': pets}
 
 
 def controller_create_pet(
